@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductRepoTest {
+class aProductRepoTest {
 
     @org.junit.jupiter.api.Test
     void getProducts() {
@@ -17,7 +15,10 @@ class ProductRepoTest {
 
         //THEN
         List<Product> expected = new ArrayList<>();
+
         expected.add(new Product("1", "Apfel"));
+        expected.add(new Product("2", "Banane"));
+        expected.add(new Product("3", "Birne"));
         assertEquals(actual, expected);
     }
 
