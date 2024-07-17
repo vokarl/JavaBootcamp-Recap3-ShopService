@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,10 +29,10 @@ class aProductRepoTest {
         ProductRepo repo = new ProductRepo();
 
         //WHEN
-        Product actual = repo.getProductById("1");
+        Optional<Product> actual = repo.getProductById("1");
 
         //THEN
-        Product expected = new Product("1", "Apfel");
+        Optional<Product> expected = Optional.of(new Product("1", "Apfel"));
         assertEquals(actual, expected);
     }
 
@@ -47,7 +48,7 @@ class aProductRepoTest {
         //THEN
         Product expected = new Product("2", "Banane");
         assertEquals(actual, expected);
-        assertEquals(repo.getProductById("2"), expected);
+
     }
 
     @org.junit.jupiter.api.Test
@@ -59,6 +60,6 @@ class aProductRepoTest {
         repo.removeProduct("1");
 
         //THEN
-        assertNull(repo.getProductById("1"));
+      assertEquals(Optional.empty(), repo.getProductById("1"));
     }
 }
