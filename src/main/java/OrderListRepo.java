@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class OrderListRepo implements OrderRepo{
     private List<Order> orders = new ArrayList<>();
 
@@ -31,5 +33,13 @@ public class OrderListRepo implements OrderRepo{
                 return;
             }
         }
+    }
+
+    @Override
+    public List<Order> findAllOrders(Order.Status status) {
+        return orders.stream()
+                .filter(order -> order.status() == status) //order - aus alle order suche
+                                        // -> order mit dem status == status vom paramete
+                .toList();
     }
 }

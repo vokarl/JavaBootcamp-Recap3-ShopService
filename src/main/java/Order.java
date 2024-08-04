@@ -6,8 +6,8 @@ public record Order(
         Status status
 ) {
     public enum Status {
-        PENDING("Pending"),
-        SHIPPED("Shipped"),
+        PROCESSING("processing"),
+        IN_DELIVERY("in delivery"),
         DELIVERED("Delivered"),
         CANCELLED("Cancelled"),
         ;
