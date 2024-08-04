@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class aProductRepoTest {
+class ProductRepoTest {
 
     @org.junit.jupiter.api.Test
     void getProducts() {
