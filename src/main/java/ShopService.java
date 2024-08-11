@@ -20,4 +20,12 @@ public class ShopService {
     public List<Order> findAllOrders(Order.Status status){
         return orderRepo.findAllOrders(status);
     }
+
+    public void updateOrder(String orderId, Order.Status newStatus){
+    Order oldOrder = orderRepo.getOrderById(orderId);
+    orderRepo.removeOrder(orderId);
+    Order newOrder = oldOrder.withStatus(newStatus);
+    orderRepo.addOrder(newOrder);
+    }
+
 }
