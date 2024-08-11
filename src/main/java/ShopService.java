@@ -1,3 +1,4 @@
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class ShopService {
             Product productToOrder = productRepo.getProductById(productId).orElseThrow(()->new ProductNotAvailableException("Product with ID " + productId + " is not available."));
             products.add(productToOrder);
             }
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, Order.Status.PROCESSING);
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, Order.Status.PROCESSING, Instant.now());
 
         return orderRepo.addOrder(newOrder);
     }
