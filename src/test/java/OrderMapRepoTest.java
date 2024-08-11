@@ -1,19 +1,21 @@
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderMapRepoTest {
-
+    private static final Instant TEST_TIME_OF_ORDER = Instant.now();
     @Test
     void getOrders() {
+
         //GIVEN
         OrderMapRepo repo = new OrderMapRepo();
 
         Product product = new Product("1", "Apfel");
-        Order newOrder = new Order("1", List.of(product), Order.Status.PROCESSING);
+        Order newOrder = new Order("1", List.of(product), Order.Status.PROCESSING, TEST_TIME_OF_ORDER);
         repo.addOrder(newOrder);
 
         //WHEN
@@ -22,7 +24,7 @@ class OrderMapRepoTest {
         //THEN
         List<Order> expected = new ArrayList<>();
         Product product1 = new Product("1", "Apfel");
-        expected.add(new Order("1", List.of(product1), Order.Status.PROCESSING));
+        expected.add(new Order("1", List.of(product1), Order.Status.PROCESSING, TEST_TIME_OF_ORDER));
 
         assertEquals(expected, actual);
     }
@@ -33,7 +35,7 @@ class OrderMapRepoTest {
         OrderMapRepo repo = new OrderMapRepo();
 
         Product product = new Product("1", "Apfel");
-        Order newOrder = new Order("1", List.of(product), Order.Status.PROCESSING);
+        Order newOrder = new Order("1", List.of(product), Order.Status.PROCESSING, TEST_TIME_OF_ORDER);
         repo.addOrder(newOrder);
 
         //WHEN
@@ -41,7 +43,7 @@ class OrderMapRepoTest {
 
         //THEN
         Product product1 = new Product("1", "Apfel");
-        Order expected = new Order("1", List.of(product1), Order.Status.PROCESSING);
+        Order expected = new Order("1", List.of(product1), Order.Status.PROCESSING, TEST_TIME_OF_ORDER);
 
         assertEquals(expected, actual);
     }
@@ -51,14 +53,14 @@ class OrderMapRepoTest {
         //GIVEN
         OrderMapRepo repo = new OrderMapRepo();
         Product product = new Product("1", "Apfel");
-        Order newOrder = new Order("1", List.of(product), Order.Status.PROCESSING);
+        Order newOrder = new Order("1", List.of(product), Order.Status.PROCESSING, TEST_TIME_OF_ORDER);
 
         //WHEN
         Order actual = repo.addOrder(newOrder);
 
         //THEN
         Product product1 = new Product("1", "Apfel");
-        Order expected = new Order("1", List.of(product1), Order.Status.PROCESSING);
+        Order expected = new Order("1", List.of(product1), Order.Status.PROCESSING, TEST_TIME_OF_ORDER);
         assertEquals(expected, actual);
         assertEquals(expected, repo.getOrderById("1"));
     }
@@ -78,12 +80,12 @@ class OrderMapRepoTest {
     void findAllOrders(){
         //GIVEN
         OrderMapRepo repo = new OrderMapRepo();
-        repo.addOrder(new Order("1", List.of(), Order.Status.PROCESSING));
-        Order orderA = new Order("2", List.of(), Order.Status.IN_DELIVERY);
+        repo.addOrder(new Order("1", List.of(), Order.Status.PROCESSING, TEST_TIME_OF_ORDER));
+        Order orderA = new Order("2", List.of(), Order.Status.IN_DELIVERY, TEST_TIME_OF_ORDER);
         repo.addOrder(orderA);
-        Order orderB = new Order("3", List.of(), Order.Status.IN_DELIVERY);
+        Order orderB = new Order("3", List.of(), Order.Status.IN_DELIVERY, TEST_TIME_OF_ORDER);
         repo.addOrder(orderB);
-        repo.addOrder(new Order("4", List.of(), Order.Status.DELIVERED));
+        repo.addOrder(new Order("4", List.of(), Order.Status.DELIVERED, TEST_TIME_OF_ORDER));
         //WHEN
         List<Order> actual = repo.findAllOrders(Order.Status.IN_DELIVERY);
         //THEN
